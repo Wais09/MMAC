@@ -98,7 +98,7 @@ export default function BJJPage() {
             <div className="relative w-full h-full">
               <iframe
                 className="w-full h-full rounded-lg border-0"
-                src="https://www.youtube.com/embed/yxJkMlqYrys"
+                src="https://www.youtube.com/embed/h75vG6SBGtE"
                 title="BJJ Training Session - Brazilian Jiu-Jitsu at Marrickville Martial Arts Club"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -113,7 +113,7 @@ export default function BJJPage() {
               <p className="text-gray-600 mt-1">Experience our world-class Brazilian Jiu-Jitsu training</p>
               <p className="text-sm text-gray-500 mt-2">
                 <a
-                  href="https://youtu.be/yxJkMlqYrys"
+                  href="https://youtube.com/shorts/h75vG6SBGtE"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-red-600 hover:text-red-700 underline font-medium"

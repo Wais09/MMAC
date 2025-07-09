@@ -3,11 +3,10 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Phone, Facebook, Instagram, Menu, X } from "lucide-react"
+import { Phone, Facebook, Instagram } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
-import { usePathname } from "next/navigation"
 
 import GoogleReviews from "@/components/GoogleReviews"
 import ErrorBoundary from "@/components/ErrorBoundary"
@@ -65,9 +64,6 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* Header */}
-      <Header />
-
       {/* Hero Section */}
       <HeroSection />
 
@@ -94,150 +90,7 @@ export default function Home() {
   )
 }
 
-function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const pathname = usePathname()
 
-  // Close mobile menu when pathname changes
-  useEffect(() => {
-    setMobileMenuOpen(false)
-  }, [pathname])
-
-  const navItems = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/styles", label: "Styles" },
-    { href: "/coaches", label: "Coaches" },
-    { href: "/blog", label: "Blog" },
-    { href: "/timetable", label: "Timetable" },
-    { href: "/membership", label: "Membership" },
-    { href: "/socials", label: "Our Socials" },
-    { href: "/faq", label: "FAQ" },
-    { href: "/contact", label: "Contact" }
-  ]
-
-  const getNavLinkClass = (href: string) => {
-    const isActive = pathname === href || (href !== "/" && pathname.startsWith(href))
-    return `transition-colors font-medium ${
-      isActive
-        ? "text-yellow-500 font-semibold"
-        : "text-gray-700 hover:text-yellow-400"
-    }`
-  }
-
-  return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4">
-        {/* Desktop Layout */}
-        <div className="hidden lg:flex lg:items-center lg:justify-center py-4 gap-2">
-          {/* Left Navigation */}
-          <nav className="flex items-center space-x-3">
-            {navItems.slice(1, 5).map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={getNavLinkClass(item.href)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Center Logo */}
-          <div className="flex items-center justify-center mx-4">
-            <Link href="/" className="flex items-center">
-              <img
-                src="/logo.png"
-                alt="Marrickville Martial Arts Club MMAC - BJJ Muay Thai MMA Wrestling classes Sydney Inner West"
-                width={80}
-                height={80}
-                className="w-20 h-20 object-contain"
-                style={{ maxHeight: '80px', maxWidth: '80px' }}
-              />
-            </Link>
-          </div>
-
-          {/* Right Side - Navigation + Buttons */}
-          <div className="flex items-center space-x-3">
-            {navItems.slice(5).map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={getNavLinkClass(item.href)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Link href="/portal">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-gray-700 hover:text-yellow-400 mr-2"
-              >
-                Member Login
-              </Button>
-            </Link>
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black"
-              onClick={() => window.open('tel:+61423111999', '_self')}
-            >
-              <Phone className="w-4 h-4 mr-2" />
-              CALL US
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Layout */}
-        <div className="flex justify-between items-center py-4 lg:hidden">
-          {/* Empty space for balance */}
-          <div className="w-6" />
-
-          {/* Center Logo */}
-          <div className="flex items-center">
-            <Link href="/" className="flex items-center">
-              <img
-                src="/logo.png"
-                alt="Marrickville Martial Arts Club MMAC - BJJ Muay Thai MMA Wrestling classes Sydney Inner West"
-                width={60}
-                height={60}
-                className="w-16 h-16 object-contain"
-                style={{ maxHeight: '60px', maxWidth: '60px' }}
-              />
-            </Link>
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            className="p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <nav className="lg:hidden pb-4 border-t">
-            <div className="flex flex-col space-y-2 pt-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`py-3 px-2 rounded-md ${getNavLinkClass(item.href)}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </nav>
-        )}
-      </div>
-    </header>
-  )
-}
 
 function HeroSection() {
   const [videoPlaying, setVideoPlaying] = useState(false)
@@ -256,23 +109,21 @@ function HeroSection() {
         // Update iframe with autoplay parameters
         iframe.src = `https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&enablejsapi=1&origin=${window.location.origin}`
 
-        // Optimistically hide play button
-        setTimeout(() => {
-          setVideoPlaying(true)
-          setShowPlayButton(false)
-        }, 1500)
+        // Hide play button immediately to try autoplay
+        setShowPlayButton(false)
+        setVideoPlaying(true)
 
         // If autoplay fails, show play button after delay
         setTimeout(() => {
           if (!videoPlaying) {
             setShowPlayButton(true)
           }
-        }, 3000)
+        }, 2000)
       }
     }
 
     // Try autoplay immediately
-    const timer = setTimeout(attemptAutoplay, 100)
+    attemptAutoplay()
 
     // Also try on any user interaction
     const handleInteraction = () => {
@@ -289,13 +140,12 @@ function HeroSection() {
     document.addEventListener('touchstart', handleInteraction, { passive: true })
 
     return () => {
-      clearTimeout(timer)
       document.removeEventListener('click', handleInteraction)
       document.removeEventListener('scroll', handleInteraction)
       document.removeEventListener('keydown', handleInteraction)
       document.removeEventListener('touchstart', handleInteraction)
     }
-  }, [autoplayAttempted, videoPlaying])
+  }, [])
 
   const playVideo = () => {
     setShowPlayButton(false)
@@ -320,7 +170,7 @@ function HeroSection() {
             width: '177.77vh', // 16:9 aspect ratio
             height: '56.25vw' // 16:9 aspect ratio
           }}
-          src="https://www.youtube.com/embed/-I544tzhNgw?mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0"
+          src="https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0"
           title="Marrickville Martial Arts Club - Classes Showcase"
           allow="autoplay; encrypted-media; fullscreen"
           allowFullScreen
@@ -456,7 +306,7 @@ function StylesSection() {
     {
       title: "Mixed Martial Arts (MMA)",
       description: "Led by Head MMA Instructor Antonio Mammarella, our program develops complete fighters with comprehensive striking and grappling skills.",
-      image: "https://ext.same-assets.com/3814609060/2252467439.jpeg",
+      image: "/uploads/MMA.jpeg",
       altText: "MMA mixed martial arts training Marrickville Sydney - fighters practicing striking grappling UFC style combat sports",
       href: "/styles/mma"
     },
@@ -504,11 +354,9 @@ function StylesSection() {
                       objectPosition: style.title === "Brazilian Jiu Jitsu (BJJ)" ? '50% 25%' : 'center'
                     }}
                     priority={index < 3}
-                    loading={index < 3 ? undefined : "lazy"}
-                    quality={85}
+                    loading={index < 3 ? "eager" : "lazy"}
+                    quality={75}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="text-white font-bold text-lg">Learn More</span>

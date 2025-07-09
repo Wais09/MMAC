@@ -40,7 +40,7 @@ export const instructors: Instructor[] = [
       "Mentored national-level competitors",
       "Built championship-level BJJ program"
     ],
-    image: "https://ext.same-assets.com/3814609060/1764842669.jpeg",
+    image: "/uploads/josh-allsopp-photo.jpg",
     martialArts: ["Brazilian Jiu-Jitsu"],
     yearsExperience: 15,
     philosophy: "Jiu-jitsu is chess with your body. It's about problem-solving, adapting, and finding solutions under pressure. I focus on helping students develop their own game while building a strong foundation in fundamental techniques."
@@ -93,7 +93,7 @@ export const instructors: Instructor[] = [
       "Developed comprehensive MMA curriculum",
       "Featured in combat sports publications"
     ],
-    image: "https://ext.same-assets.com/3814609060/2252467439.jpeg",
+    image: "/uploads/antonio-mammarella-photo.jpg",
     martialArts: ["Mixed Martial Arts", "Kickboxing", "Submission Grappling"],
     yearsExperience: 14,
     philosophy: "MMA is the ultimate test of martial arts skill, combining all aspects of combat into one discipline. I focus on developing well-rounded fighters who are equally comfortable standing, clinching, or on the ground while maintaining the highest levels of sportsmanship."
@@ -117,7 +117,7 @@ export const instructors: Instructor[] = [
       "Certified under Ajarn Chai",
       "Featured in Combat Sports Magazine"
     ],
-    image: "https://ext.same-assets.com/3814609060/3841254086.jpeg",
+    image: "/uploads/bastian-ayala-photo.jpg",
     martialArts: ["Muay Thai", "Kickboxing"],
     yearsExperience: 10,
     philosophy: "Muay Thai is not just about physical techniques - it's about mental toughness, cultural respect, and finding your inner warrior. Every student has the potential to excel with proper guidance and dedication."
@@ -171,7 +171,7 @@ export const instructors: Instructor[] = [
       "European Championship Medalist",
       "Coached students to international competition success"
     ],
-    image: "https://ext.same-assets.com/3814609060/2856943771.jpeg",
+    image: "/uploads/issa-issa-photo.jpg",
     martialArts: ["Brazilian Jiu-Jitsu", "No-Gi Grappling"],
     yearsExperience: 8,
     philosophy: "BJJ is a journey of constant learning and self-improvement. I believe in building strong fundamentals while encouraging students to develop their own unique style. Competition teaches us valuable lessons about pressure, technique, and mental fortitude that benefit every aspect of training."
