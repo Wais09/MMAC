@@ -1,0 +1,294 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  MEMBER
+  TRAINER
+  ADMIN
+}
+
+enum MembershipType {
+  CASUAL
+  KICK_STARTER
+  TWO_X_PLAN
+  UNLIMITED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  WAITLIST
+  NO_SHOW
+}
+
+enum ClassType {
+  BJJ
+  MUAY_THAI
+  MMA
+  WRESTLING
+  KIDS_BJJ
+  KIDS_MUAY_THAI
+  WOMENS_MUAY_THAI
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?
+  role          Role      @default(MEMBER)
+
+  // Profile information
+  firstName     String?
+  lastName      String?
+  phone         String?
+  dateOfBirth   DateTime?
+  profileImage  String?
+  address       String?
+  suburb        String?
+  postcode      String?
+  state         String?
+
+  // Emergency contact
+  emergencyContactName  String?
+  emergencyContactPhone String?
+  emergencyRelationship String?
+
+  // Medical information
+  medicalConditions String?
+  allergies        String?
+  medications      String?
+
+  // Membership information
+  membershipType   MembershipType?
+  membershipStart  DateTime?
+  membershipEnd    DateTime?
+  isActive         Boolean          @default(true)
+
+  // ClubWorx import data
+  clubworxId       String?  @unique
+
+  // Waiver and documents
+  waiverSigned     Boolean   @default(false)
+  waiverSignedDate DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+
+  // Member relationships
+  bookings     Booking[]
+  attendances  Attendance[]
+  payments     Payment[]
+  progressLogs ProgressLog[]
+
+  // Trainer relationships
+  assignedClasses Class[] @relation("TrainerClasses")
+  trainerNotes    TrainerNote[] @relation("TrainerNotes")
+  memberNotes     TrainerNote[] @relation("MemberNotes")
+
+  @@map("users")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Class {
+  id          String    @id @default(cuid())
+  name        String
+  type        ClassType
+  description String?
+
+  // Schedule
+  dayOfWeek   Int       // 0 = Sunday, 1 = Monday, etc.
+  startTime   String    // Format: "18:00"
+  endTime     String    // Format: "19:30"
+  duration    Int       // Duration in minutes
+
+  // Capacity and pricing
+  maxCapacity Int       @default(20)
+  price       Float?    // Price per class for casual members
+
+  // Trainer assignment
+  trainerId   String?
+  trainer     User?     @relation("TrainerClasses", fields: [trainerId], references: [id])
+
+  // Status
+  isActive    Boolean   @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookings    Booking[]
+  attendances Attendance[]
+
+  @@map("classes")
+}
+
+model Booking {
+  id        String        @id @default(cuid())
+  memberId  String
+  classId   String
+  date      DateTime      // Specific date for this booking
+  status    BookingStatus @default(CONFIRMED)
+  notes     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  member User  @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  class  Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  // One booking can have one attendance record
+  attendance Attendance?
+
+  @@unique([memberId, classId, date])
+  @@map("bookings")
+}
+
+model Attendance {
+  id        String   @id @default(cuid())
+  memberId  String
+  classId   String
+  bookingId String?  @unique
+  date      DateTime
+  checkedIn Boolean  @default(false)
+  checkedInAt DateTime?
+  notes     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  member  User     @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  class   Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  booking Booking? @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+
+  @@unique([memberId, classId, date])
+  @@map("attendances")
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  memberId        String
+  amount          Float
+  currency        String        @default("AUD")
+  description     String?
+  status          PaymentStatus @default(PENDING)
+
+  // Stripe integration
+  stripePaymentId String?       @unique
+  stripeInvoiceId String?
+
+  // Membership period this payment covers
+  periodStart     DateTime?
+  periodEnd       DateTime?
+
+  // Payment metadata
+  paymentMethod   String?       // card, bank_transfer, cash
+  paidAt          DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  member User @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
+
+model ProgressLog {
+  id          String   @id @default(cuid())
+  memberId    String
+  classType   ClassType
+  level       String?  // e.g., "White Belt", "Beginner", "Intermediate"
+  achievement String?  // Description of achievement or milestone
+  notes       String?
+  date        DateTime @default(now())
+
+  // Trainer who logged the progress
+  loggedBy    String?  // User ID of trainer
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  member User @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@map("progress_logs")
+}
+
+model TrainerNote {
+  id       String @id @default(cuid())
+  memberId String
+  trainerId String
+  classType ClassType?
+  content  String
+  isPrivate Boolean @default(false) // Only visible to trainers and admins
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  member  User @relation("MemberNotes", fields: [memberId], references: [id], onDelete: Cascade)
+  trainer User @relation("TrainerNotes", fields: [trainerId], references: [id], onDelete: Cascade)
+
+  @@map("trainer_notes")
+}
+
+model SystemSetting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("system_settings")
+}
