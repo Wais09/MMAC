@@ -1,0 +1,2 @@
+# This file ensures the public directory and its subdirectories are included in git
+# and properly deployed to Netlify

@@ -13,7 +13,7 @@ export default function WomensMuayThaiPage() {
       {/* Hero Section */}
       <div className="relative h-96 overflow-hidden">
         <Image
-          src="/uploads/womens-muaythai2.jpg"
+          src="/uploads/Womens-muaythai2.jpg"
           alt="Women's Muay Thai classes Marrickville Sydney - ladies only Thai boxing fitness self-defense empowering supportive environment Inner West"
           fill
           className="object-cover object-center"
