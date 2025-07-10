@@ -290,42 +290,42 @@ function StylesSection() {
     {
       title: "Brazilian Jiu Jitsu (BJJ)",
       description: "Our Brazilian Jiu-Jitsu program is led by Head Instructor Josh Allsopp, bringing championship-level training and analytical precision to every class.",
-      image: "/uploads/BJJ-photo.jpg.jpg",
+      image: "https://ext.same-assets.com/3814609060/2851098477.jpeg",
       altText: "Brazilian Jiu-Jitsu BJJ classes Marrickville Sydney - students practicing ground fighting grappling techniques at MMAC martial arts gym",
       href: "/styles/bjj"
     },
     {
       title: "Muay Thai",
       description: "Our Muay Thai classes are led by Bastian Ayala and Johana Reyes Lagos, offering traditional training and specialized women's classes.",
-      image: "/uploads/Muay-thai.jpg",
+      image: "https://ext.same-assets.com/3814609060/3027934024.jpeg",
       altText: "Muay Thai classes Marrickville Sydney - practitioners training Art of Eight Limbs Thai boxing kickboxing at martial arts club",
       href: "/styles/muay-thai"
     },
     {
       title: "Mixed Martial Arts (MMA)",
       description: "Led by Head MMA Instructor Antonio Mammarella, our program develops complete fighters with comprehensive striking and grappling skills.",
-      image: "/uploads/MMA.jpeg",
+      image: "https://ext.same-assets.com/3814609060/1633847439.jpeg",
       altText: "MMA mixed martial arts training Marrickville Sydney - fighters practicing striking grappling UFC style combat sports",
       href: "/styles/mma"
     },
     {
       title: "Kids",
       description: "Our classes will help with confidence-building, and personal growth.",
-      image: "/uploads/kids2.jpg",
+      image: "https://ext.same-assets.com/3814609060/2277852474.jpeg",
       altText: "Kids martial arts classes Marrickville Sydney - children ages 5-12 learning BJJ Muay Thai wrestling confidence building",
       href: "/styles/kids"
     },
     {
       title: "Wrestling",
       description: "Led by world champion Tsuchika Shimoyamada - multiple Australian & Japanese national champion, Oceania & Asian champion. Experience world-class wrestling instruction.",
-      image: "/uploads/Wrestling.jpg",
+      image: "https://ext.same-assets.com/3814609060/1572477315.jpeg",
       altText: "Wrestling classes Marrickville Sydney - Olympic wrestling training world champion Tsuchika Shimoyamada instructor",
       href: "/styles/wrestling"
     },
     {
       title: "Women's Muay Thai",
       description: "Led by Johana Reyes Lagos, our women's Muay Thai classes create a supportive, empowering environment exclusively for women of all levels.",
-      image: "/uploads/womens-muaythai.jpg.jpg",
+      image: "https://ext.same-assets.com/3814609060/4056987022.jpeg",
       altText: "Women's Muay Thai classes Marrickville Sydney - ladies only Thai boxing empowering supportive environment female fitness",
       href: "/styles/womens-muay-thai"
     }
