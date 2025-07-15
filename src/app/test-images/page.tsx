@@ -9,16 +9,19 @@ export default function TestImagesPage() {
   const [testResults, setTestResults] = useState<{ [key: string]: string }>({})
 
   const testImages = [
-    { name: "BJJ-photo.jpg.jpg", path: "/uploads/BJJ-photo.jpg.jpg", description: "BJJ Style Card" },
-    { name: "Muay-thai.jpg", path: "/uploads/Muay-thai.jpg", description: "Muay Thai Style Card" },
-    { name: "MMA.jpeg", path: "/uploads/MMA.jpeg", description: "MMA Style Card" },
-    { name: "kids2.jpg", path: "/uploads/kids2.jpg", description: "Kids Style Card" },
-    { name: "Wrestling.jpg", path: "/uploads/Wrestling.jpg", description: "Wrestling Style Card" },
-    { name: "womens-muaythai.jpg.jpg", path: "/uploads/womens-muaythai.jpg.jpg", description: "Women's Muay Thai Style Card" },
-    { name: "BJJ2.jpg", path: "/uploads/BJJ2.jpg", description: "BJJ Page Hero" },
-    { name: "Muay-thai2.jpg", path: "/uploads/Muay-thai2.jpg", description: "Muay Thai Page Hero" },
-    { name: "Womens-muaythai2.jpg", path: "/uploads/Womens-muaythai2.jpg", description: "Women's Muay Thai Page Hero" },
-    { name: "Wrestlin2.jpg", path: "/uploads/Wrestlin2.jpg", description: "Wrestling Page Hero" }
+    // Homepage Style Cards (CRITICAL FOR LIVE SITE)
+    { name: "BJJ-photo.jpg.jpg", path: "/uploads/BJJ-photo.jpg.jpg", description: "🏠 Homepage: BJJ Style Card", priority: true },
+    { name: "Muay-thai.jpg", path: "/uploads/Muay-thai.jpg", description: "🏠 Homepage: Muay Thai Style Card", priority: true },
+    { name: "MMA.jpeg", path: "/uploads/MMA.jpeg", description: "🏠 Homepage: MMA Style Card", priority: true },
+    { name: "kids2.jpg", path: "/uploads/kids2.jpg", description: "🏠 Homepage: Kids Style Card", priority: true },
+    { name: "Wrestling.jpg", path: "/uploads/Wrestling.jpg", description: "🏠 Homepage: Wrestling Style Card", priority: true },
+    { name: "womens-muaythai.jpg.jpg", path: "/uploads/womens-muaythai.jpg.jpg", description: "🏠 Homepage: Women's Muay Thai Style Card", priority: true },
+
+    // Individual Style Page Heroes
+    { name: "BJJ2.jpg", path: "/uploads/BJJ2.jpg", description: "📄 BJJ Page Hero", priority: false },
+    { name: "Muay-thai2.jpg", path: "/uploads/Muay-thai2.jpg", description: "📄 Muay Thai Page Hero", priority: false },
+    { name: "Womens-muaythai2.jpg", path: "/uploads/Womens-muaythai2.jpg", description: "📄 Women's Muay Thai Page Hero", priority: false },
+    { name: "Wrestlin2.jpg", path: "/uploads/Wrestlin2.jpg", description: "📄 Wrestling Page Hero", priority: false }
   ]
 
   const updateResult = (imageName: string, status: string) => {
