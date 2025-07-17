@@ -140,16 +140,6 @@ function HeroSection() {
         />
       </div>
 
-      {/* Mobile Video Fallback */}
-      <div className="md:hidden absolute inset-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-gray-900"
-          style={{
-            backgroundImage: `url('https://img.youtube.com/vi/-I544tzhNgw/maxresdefault.jpg')`
-          }}
-        />
-      </div>
-
       {/* Dark Overlay for Better Text Readability */}
       <div className="absolute inset-0 bg-black bg-opacity-40" />
 
