@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ChatBot from "@/components/ChatBot";
 import StickyTrialBanner from "@/components/StickyTrialBanner";
-import PWAInstallPrompt from "@/components/PWAInstallPrompt";
+// ... commented out PWAInstallPrompt for now
+// import PWAInstallPrompt from "@/components/PWAInstallPrompt";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Header from "@/components/Header";
@@ -36,7 +37,7 @@ export default function ClientBody({
         <StickyTrialBanner />
 
         {/* PWA Install Prompt - Available on all pages */}
-        <PWAInstallPrompt />
+        {/* <PWAInstallPrompt /> */}
 
         {/* Performance Monitoring - Available on all pages */}
         <PerformanceMonitor />

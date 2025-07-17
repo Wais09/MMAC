@@ -93,40 +93,12 @@ export default function Home() {
 
 function HeroSection() {
   const [videoPlaying, setVideoPlaying] = useState(false)
-  const [showPlayButton, setShowPlayButton] = useState(true)
   const [autoplayAttempted, setAutoplayAttempted] = useState(false)
 
   // Try autoplay on component mount and user interactions
   useEffect(() => {
-    const attemptAutoplay = () => {
-      if (autoplayAttempted) return
-
-      setAutoplayAttempted(true)
-      const iframe = document.getElementById('hero-video') as HTMLIFrameElement
-
-      if (iframe) {
-        // Update iframe with autoplay parameters
-        iframe.src = `https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&enablejsapi=1&origin=${window.location.origin}`
-
-        // Hide play button immediately to try autoplay
-        setShowPlayButton(false)
-        setVideoPlaying(true)
-
-        // If autoplay fails, show play button after delay
-        setTimeout(() => {
-          if (!videoPlaying) {
-            setShowPlayButton(true)
-          }
-        }, 2000)
-      }
-    }
-
-    // Try autoplay immediately
-    attemptAutoplay()
-
     // Also try on any user interaction
     const handleInteraction = () => {
-      attemptAutoplay()
       document.removeEventListener('click', handleInteraction)
       document.removeEventListener('scroll', handleInteraction)
       document.removeEventListener('keydown', handleInteraction)
@@ -146,15 +118,6 @@ function HeroSection() {
     }
   }, [])
 
-  const playVideo = () => {
-    setShowPlayButton(false)
-    setVideoPlaying(true)
-    const iframe = document.getElementById('hero-video') as HTMLIFrameElement
-    if (iframe) {
-      iframe.src = `https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&enablejsapi=1&origin=${window.location.origin}`
-    }
-  }
-
   return (
     <section className="relative h-screen bg-gray-900 overflow-hidden">
       {/* YouTube Video Background */}
@@ -169,44 +132,13 @@ function HeroSection() {
             width: '177.77vh', // 16:9 aspect ratio
             height: '56.25vw' // 16:9 aspect ratio
           }}
-          src="https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0"
+          // src={`https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&enablejsapi=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`}
+          src={`https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&enablejsapi=1&origin=${window.location.origin}`}
           title="Marrickville Martial Arts Club - Classes Showcase"
           allow="autoplay; encrypted-media; fullscreen"
           allowFullScreen
           loading="eager"
         />
-
-        {/* Video Thumbnail & Play Button Overlay - Only show if autoplay fails */}
-        {showPlayButton && (
-          <div
-            className="absolute inset-0 bg-cover bg-center cursor-pointer group"
-            style={{
-              backgroundImage: `url('https://img.youtube.com/vi/-I544tzhNgw/maxresdefault.jpg')`
-            }}
-            onClick={playVideo}
-          >
-            {/* Play Button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-red-600 hover:bg-red-700 rounded-full p-6 transition-all duration-300 transform group-hover:scale-110 shadow-2xl">
-                <svg
-                  className="w-12 h-12 text-white ml-1"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </div>
-            </div>
-            {/* Play Video Text */}
-            <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 animate-pulse">
-              <div className="bg-yellow-400 bg-opacity-90 px-6 py-3 rounded-full shadow-lg">
-                <p className="text-black text-lg font-bold">
-                  🎬 Watch Our Classes in Action
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Mobile Video Fallback */}
