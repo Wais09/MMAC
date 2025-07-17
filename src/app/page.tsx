@@ -132,8 +132,7 @@ function HeroSection() {
             width: '177.77vh', // 16:9 aspect ratio
             height: '56.25vw' // 16:9 aspect ratio
           }}
-          // src={`https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&enablejsapi=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`}
-          src={`https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&enablejsapi=1&origin=${window.location.origin}`}
+          src={`https://www.youtube.com/embed/-I544tzhNgw?autoplay=1&mute=1&loop=1&playlist=-I544tzhNgw&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&disablekb=1&fs=0&enablejsapi=1&origin=${typeof window !== "undefined" ? window.location.origin : ""}`}
           title="Marrickville Martial Arts Club - Classes Showcase"
           allow="autoplay; encrypted-media; fullscreen"
           allowFullScreen
