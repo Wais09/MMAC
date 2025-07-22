@@ -147,27 +147,29 @@ export default function OptimizedImage({
 
       {/* Actual image - only render when in view or priority */}
       {(priority || isInView) && (
-        <Image
-          src={optimizedSrc}
-          alt={alt}
-          width={width}
-          height={height}
-          fill={fill}
-          sizes={responsiveSizes}
-          quality={quality}
-          priority={priority}
-          placeholder={placeholder}
-          blurDataURL={blurDataURL}
-          className={`transition-opacity duration-300 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          } ${hasError ? 'hidden' : ''}`}
-          onLoad={handleLoad}
-          onError={handleError}
-          style={{
-            objectFit: 'cover',
-            objectPosition: 'center',
-          }}
-        />
+        <div className="relative h-48 sm:h-56 lg:h-48">
+          <Image
+            src={optimizedSrc}
+            alt={alt}
+            width={width}
+            height={height}
+            fill={fill}
+            sizes={responsiveSizes}
+            quality={quality}
+            priority={priority}
+            placeholder={placeholder}
+            blurDataURL={blurDataURL}
+            className={`transition-opacity duration-300 ${
+              isLoaded ? 'opacity-100' : 'opacity-0'
+            } ${hasError ? 'hidden' : ''}`}
+            onLoad={handleLoad}
+            onError={handleError}
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center',
+            }}
+          />
+        </div>
       )}
 
       {/* Low quality placeholder for better perceived performance */}
