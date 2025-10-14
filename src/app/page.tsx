@@ -469,7 +469,7 @@ function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-4">CONTACT US</h4>
             <div className="text-sm text-gray-400 space-y-2">
-              <p className="leading-relaxed">Unit 5/1-7 JABEZ ST.<br />MARRICKVILLE NSW 2204</p>
+              <p className="leading-relaxed">201-203 VICTORIA RD<br />MARRICKVILLE 2204</p>
               <p><a href="mailto:info@marrickvillemartialartsclub.com.au" className="hover:text-yellow-400 transition-colors">info@marrickvillemartialartsclub.com.au</a></p>
               <p><a href="tel:0423111999" className="hover:text-yellow-400 transition-colors">(042) 311 1999</a></p>
               <p className="leading-relaxed">MON - SUN 7:00 - 9:30am,<br />4:00 - 9:30pm</p>
