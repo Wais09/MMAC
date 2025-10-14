@@ -174,7 +174,7 @@ export default function ContactPage() {
                     allowFullScreen
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Marrickville Martial Arts Club Location - Unit 5/1-7 Jabez Street, Marrickville NSW 2204"
+                    title="Marrickville Martial Arts Club Location - 201-203 Victoria Rd, Marrickville 2204"
                     className="w-full h-96"
                   />
                 </div>
@@ -212,8 +212,8 @@ export default function ContactPage() {
                   <div className="flex items-start">
                     <MapPin className="w-5 h-5 text-yellow-500 mr-3 mt-1" />
                     <div>
-                      <p className="font-semibold">Unit 5/1-7 Jabez Street</p>
-                      <p className="text-gray-600">Marrickville NSW 2204</p>
+                      <p className="font-semibold">201-203 Victoria Rd</p>
+                      <p className="text-gray-600">Marrickville 2204</p>
                     </div>
                   </div>
                   <div className="flex items-start">
