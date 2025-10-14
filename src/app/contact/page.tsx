@@ -40,8 +40,8 @@ export default function ContactPage() {
               <MapPin className="w-8 h-8 text-yellow-500 mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">Address</h3>
               <p className="text-gray-600">
-                Unit 5/1-7 Jabez Street<br />
-                Marrickville NSW 2204
+                201-203 Victoria Rd<br />
+                Marrickville 2204
               </p>
             </Card>
             <Card className="text-center p-6 bg-white">
